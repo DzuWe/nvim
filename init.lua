@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-require('vim-common') -- Common vim config
+require('vim-essentials') -- Essentials vim config
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
