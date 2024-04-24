@@ -49,7 +49,7 @@ return {
 
 			wk.register({
 				e = { vim.diagnostic.open_float, "LSP: hover diagnostic" },
-				L = {
+				l = {
 					name = "+LSP",
 					q = { vim.diagnostic.setloclist, "LSP: list of problems" },
 					R = { "<CMD>LspRestart<CR>", "Restart server" },
@@ -93,7 +93,7 @@ return {
 							},
 						},
 					}, {
-						prefix = "<leader>L",
+						prefix = "<leader>l",
 						buffer = ev.buf,
 					})
 

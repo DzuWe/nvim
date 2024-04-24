@@ -101,4 +101,5 @@ local all = {
 
 local date = os.date '\n%d %B %Y (%A)'
 math.randomseed(os.time())
+
 return all[math.random(5)] .. date
