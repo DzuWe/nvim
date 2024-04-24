@@ -1,4 +1,4 @@
-local mini_modules = { "surround", "starter", "sessions", "comment" }
+local mini_modules = { "surround", "starter", "comment" }
 
 local modules_path = "plugins.mini."
 return {
