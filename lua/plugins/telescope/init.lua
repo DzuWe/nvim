@@ -1,5 +1,5 @@
 local function getModule(name)
-  return require("lua.plugins.telescope." .. name)
+  return require("plugins.telescope." .. name)
 end
 
 return {
