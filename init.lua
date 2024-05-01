@@ -1,7 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 require('config.options')
 require('config.autocommands')
-require('config.keymaps')
+vim.g.mapleader = " "
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({

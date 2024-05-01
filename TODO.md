@@ -5,12 +5,12 @@
 
 ## Open
 
-- Change keybinding for visual mode in mini.surround from s to z
-- В neotree перезатирается комбинация клавиш gc для коммита
-- Разобраться с автокомплитом для поиска и комманд
 
 ## Closed
 - LSP стsанно реагируе на комбинацию <leader>l... иногда срабатывает но в итоге нажимается пробел
 - Отключать ai по умолчанию после настройки решил оставить
 
+- Change keybinding for visual mode in mini.surround from s to z
+- В neotree перезатирается комбинация клавиш gc для коммита
+- Разобраться с автокомплитом для поиска и комманд
 
