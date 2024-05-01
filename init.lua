@@ -1,5 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-require('vim-essentials') -- Essentials vim config
+require('config.options')
+require('config.autocommands')
+require('config.keymaps')
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({

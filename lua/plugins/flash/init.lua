@@ -1,8 +1,8 @@
 local theme = {
-	FlashBackdrop = "#585b70",
-	FlashMatch = "#f9e2af",
-	FlashCurrent = "#f38ba8",
-	FlashLabel = "#cba6f7",
+	FlashBackdrop = {fg = "#585b70" },
+	flashmatch = {fg = "#f9e2af" },
+	FlashCurrent = {fg = "#f38ba8" },
+	FlashLabel = {fg = "#81c8be"},
 }
 
 return {
@@ -11,7 +11,7 @@ return {
 	opts = {},
 	keys = {
 		{
-			"s",
+			"<CR>",
 			mode = { "n", "x", "o" },
 			function()
 				require("flash").jump()
@@ -31,7 +31,7 @@ return {
 		require("flash").setup({})
 
     for k, v in pairs(theme) do
-      vim.api.nvim_set_hl(0, k, { fg = v })
+      vim.api.nvim_set_hl(0, k, v)
     end
 	end,
 }

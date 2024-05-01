@@ -29,20 +29,22 @@ local kind_icons = {
 return {
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-		},
-	},
-	{
-		"hrsh7th/cmp-nvim-lsp",
+		dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
+		},
 		config = function()
 			local cmp = require("cmp")
+			local ls = require("luasnip")
 
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("cmp.mts-ds-variables").setup()
 
 			cmp.setup({
 				snippet = {
@@ -56,7 +58,7 @@ return {
 						-- Kind icons
 						vim_item.kind = string.format("%s", kind_icons[vim_item.kind]) -- This concatenates the icons with the name of the item kind
 						-- Source
-						vim_item.menu = ({ nvim_lsp = "-lsp-" })[entry.source.name]
+              vim_item.menu = ({ nvim_lsp = "", path = "", luasnip = "", buffer = "", ['mts-ds-variables'] = '󰝤 ' })[entry.source.name]
 						return vim_item
 					end,
 				},
@@ -69,15 +71,58 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<CR>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							if ls.expandable() then
+								ls.expand()
+							else
+								cmp.confirm({
+									select = true,
+								})
+							end
+						else
+							fallback()
+						end
+					end),
+
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif ls.locally_jumpable(1) then
+							ls.jump(1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif ls.locally_jumpable(-1) then
+							ls.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{
-						{ name = "path" },
-						{ name = "buffer" },
-					},
+					{ name = "mts-ds-variables" },
+					{ name = "path" },
+					{ name = "buffer" },
+				}),
+			})
+			cmp.setup.cmdline("/", {
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+			cmp.setup.cmdline(":", {
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
 				}),
 			})
 		end,

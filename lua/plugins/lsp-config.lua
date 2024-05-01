@@ -1,9 +1,11 @@
 local predefined_lsp = {
+  "cssls",
 	"lua_ls",
 	"tsserver",
 	"jsonls",
 	"emmet_language_server",
 	"volar",
+	"marksman",
 	"graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
 
