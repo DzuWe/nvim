@@ -13,6 +13,11 @@ return {
 		end
 
 		vim.g.codeium_disable_bindings = 1
+    vim.g.codeium_filetypes_disabled_by_default = true
+
+    vim.g.codeium_filetypes = {
+      lua = true
+    }
 
 		wk.register({
 			["<C-g>"] = {
@@ -26,7 +31,7 @@ return {
 					return refresh_lualine(vim.fn["codeium#Clear"]())
 				end,
 				"Codeium clear",
-			},
+		},
 			["<M-]>"] = {
 				function()
 					return refresh_lualine(vim.fn["codeium#CycleCompletions"](1))

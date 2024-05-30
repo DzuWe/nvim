@@ -26,7 +26,6 @@ return {
 				lualine_c = {
 					"filename",
 					ai_status,
-					{ require("NeoComposer.ui").status_recording },
 				},
 			},
 		})
