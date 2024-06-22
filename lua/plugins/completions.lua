@@ -107,7 +107,7 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
+				--	{ name = "luasnip" },
 					{ name = "mts-ds-variables" },
 					{ name = "path" },
 					{ name = "buffer" },
