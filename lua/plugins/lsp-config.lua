@@ -1,5 +1,6 @@
 local predefined_lsp = {
   "angularls",
+  "html",
   "cssls",
 	"lua_ls",
 	"tsserver",
