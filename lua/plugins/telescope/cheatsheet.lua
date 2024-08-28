@@ -28,8 +28,8 @@ return {
         ["<C-E>"] = ctactions.edit_user_cheatsheet,
       },
     })
-    wk.register {
-      ['<leader>f?'] = { '<CMD>Cheatsheet<CR>', 'Find in cheatsheets'}
+    wk.add {
+      { '<leader>f?',  '<CMD>Cheatsheet<CR>', desc = 'Find in cheatsheets'}
     }
   end,
 }

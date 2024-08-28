@@ -1,7 +1,7 @@
 local predefined_lsp = {
-  "angularls",
-  "html",
-  "cssls",
+	"angularls",
+	"html",
+	"cssls",
 	"lua_ls",
 	"tsserver",
 	"jsonls",
@@ -32,6 +32,7 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 			local wk = require("which-key")
+			local wkb = require("which-key.extras").expand.buf
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			for _, lsp in ipairs(predefined_lsp) do
@@ -40,25 +41,19 @@ return {
 				if not status then
 					cfg = {}
 				end
-
-				cfg["capabilities"] = capabilities
+        cfg.capabilities = capabilities
 
 				lspconfig[lsp].setup(cfg)
 			end
 
-			-- Global mappings.
-			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "LSP: diagnostic PREV" })
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "LSP: diagnostic NEXT" })
-
-			wk.register({
-				e = { vim.diagnostic.open_float, "LSP: hover diagnostic" },
-				l = {
-					name = "+LSP",
-					q = { vim.diagnostic.setloclist, "LSP: list of problems" },
-					R = { "<CMD>LspRestart<CR>", "Restart server" },
-				},
-			}, { prefix = "<leader>" })
+			wk.add({
+				{ "[d", vim.diagnostic.goto_prev, desc = "LSP: diagnostic PREV" },
+				{ "]d", vim.diagnostic.goto_next, desc = "LSP: diagnostic NEXT" },
+				{ "<leader>e", vim.diagnostic.open_float, desc = "LSP: hover diagnostic" },
+				{ "<leader>l", group = "LSP" },
+				{ "<leader>q", vim.diagnostic.setloclist, desc = "LSP: list of problems" },
+				{ "<leader>R", "<CMD>LspRestart<CR>", desc = "Restart server" },
+			})
 
 			-- Use LspAttach autocommand to only map the following keys
 			-- after the language server attaches to the current buffer
@@ -71,39 +66,78 @@ return {
 					-- Buffer local mappings.
 					-- See `:help vim.lsp.*` for documentation on any of the below functions
 
-					wk.register({
-						gd = { vim.lsp.buf.definition, "LSP: go to definition" },
-						gD = { vim.lsp.buf.type_definition, "LSP: go to type definition" },
-						gr = { vim.lsp.buf.references, "LSP: go to references" },
-						K = { vim.lsp.buf.hover, "LSP: hover info under cursor" },
-						gi = { vim.lsp.buf.implementation, "LSP: go to implementation" },
-						["<leader>D"] = { vim.lsp.buf.type_definition, "LSP: go to type definition" },
-						["<leader>cF"] = { vim.lsp.buf.format, "LSP: format buffer" },
+					wk.add({
+						{ "gd", vim.lsp.buf.definition, desc = "LSP: go to definition" },
+						{ "gD", vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
+						{ "gr", vim.lsp.buf.references, desc = "LSP: go to references" },
+						{ "K", vim.lsp.buf.hover, desc = "LSP: hover info under cursor" },
+						{ "gi", vim.lsp.buf.implementation, desc = "LSP: go to implementation" },
+						{ "<leader>D", vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
+						{ "<leader>cF", vim.lsp.buf.format, desc = "LSP: format buffer" },
 					})
-
-					wk.register({
-						d = { "<CMD>vertical split | lua vim.lsp.buf.definition()<CR>", "Open definition in side pane" },
-						s = { vim.lsp.buf.signature_help, "Signature help" },
-						r = { vim.lsp.buf.rename, "LSP: rename symbol" },
-						w = {
-							name = "+workspace",
-							a = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
-							r = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
-							l = {
-								function()
-									print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-								end,
-								"List workspace folders",
-							},
+					wk.add({
+						{
+							"<leader><leader>",
+							vim.lsp.buf.code_action,
+							desc = "LSP: Code action",
+							mode = { "n", "v" },
+							expand = function()
+								return wkb()
+							end,
 						},
-					}, {
-						prefix = "<leader>l",
-						buffer = ev.buf,
+						{
+							"<leader>ld",
+							"<CMD>vertical split | lua vim.lsp.buf.definition()<CR>",
+							desc = "Open definition in side pane",
+							expand = function()
+								return wkb()
+							end,
+						},
+						{
+							"<leader>ls",
+							vim.lsp.buf.signature_help,
+							desc = "Signature help",
+							expand = function()
+								return wkb()
+							end,
+						},
+						{
+							"<leader>lr",
+							vim.lsp.buf.rename,
+							desc = "LSP: rename symbol",
+							expand = function()
+								return wkb()
+							end,
+						},
+						{ "<leader>lw", group = "workspace" },
+						{
+							"<leader>lwa",
+							vim.lsp.buf.add_workspace_folder,
+							desc = "Add workspace folder",
+							expand = function()
+								return wkb()
+							end,
+						},
+						{
+							"<leader>lwr",
+							vim.lsp.buf.remove_workspace_folder,
+							desc = "Remove workspace folder",
+							expand = function()
+								return wkb()
+							end,
+						},
+						{
+							"<leader>lwl",
+							function()
+								print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+							end,
+							desc = "List workspace folders",
+							expand = function()
+								return wkb()
+							end,
+						},
 					})
 
-					wk.register({
-						["<leader><leader>"] = { vim.lsp.buf.code_action, "LSP: Code action" },
-					}, { mode = { "n", "v" }, buffer = ev.buf })
 				end,
 			})
 		end,

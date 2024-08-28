@@ -7,8 +7,8 @@ return {
 			default_file_explorer = false,
 		})
 
-		wk.register({
-			["<leader>no"] = { "<CMD>Oil<CR>", "Toggle Oil" },
+		wk.add({
+      {"<leader>no",  "<CMD>Oil<CR>", desc = "Toggle Oil" },
 		})
 	end,
 }

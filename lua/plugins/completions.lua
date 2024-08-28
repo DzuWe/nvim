@@ -30,6 +30,9 @@ return {
   {
     "L3MON4D3/LuaSnip",
     dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
+    config = function () 
+      require("luasnip.loaders.from_snipmate").lazy_load()
+    end
   },
   {
     "hrsh7th/nvim-cmp",
@@ -75,9 +78,10 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<M-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ["<M-l>"] = cmp.mapping.confirm({ select = true }),
 
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -101,7 +105,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          --	{ name = "luasnip" },
+         	{ name = "luasnip" },
           { name = "mts-ds-variables" },
           { name = "path" },
           { name = "buffer" },
