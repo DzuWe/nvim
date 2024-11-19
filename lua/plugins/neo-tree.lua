@@ -9,10 +9,16 @@ return {
 	config = function()
 		local wk = require("which-key")
 		require("neo-tree").setup({
+			sources = {
+				"filesystem",
+				"buffers",
+				"git_status",
+				"document_symbols",
+			},
 			buffers = {
 				follow_current_file = {
-          enabled = true
-        },
+					enabled = true,
+				},
 			},
 		})
 
@@ -21,6 +27,7 @@ return {
 			{ "<leader>ne", "<CMD>Neotree toggle<CR>", desc = "Toggle neo-tree" },
 			{ "<leader>ng", "<CMD>Neotree git_status right toggle<CR>", desc = "Toggle git status" },
 			{ "<leader>nb", "<CMD>Neotree buffers right toggle<CR>", desc = "Toggle buffers" },
+			{ "<leader>ns", "<CMD>Neotree document_symbols right toggle<CR>", desc = "Toggle symbols" },
 		})
 
 		vim.keymap.set("n", "<leader>nf", function()

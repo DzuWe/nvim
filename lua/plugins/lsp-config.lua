@@ -37,7 +37,6 @@ return {
 
 			for _, lsp in ipairs(predefined_lsp) do
 				local status, cfg = pcall(require, "lsp." .. lsp)
-
 				if not status then
 					cfg = {}
 				end
@@ -51,8 +50,7 @@ return {
 				{ "]d", vim.diagnostic.goto_next, desc = "LSP: diagnostic NEXT" },
 				{ "<leader>e", vim.diagnostic.open_float, desc = "LSP: hover diagnostic" },
 				{ "<leader>l", group = "LSP" },
-				{ "<leader>q", vim.diagnostic.setloclist, desc = "LSP: list of problems" },
-				{ "<leader>R", "<CMD>LspRestart<CR>", desc = "Restart server" },
+				{ "<leader>lR", "<CMD>LspRestart<CR>", desc = "Restart server" },
 			})
 
 			-- Use LspAttach autocommand to only map the following keys
@@ -66,8 +64,8 @@ return {
 					-- Buffer local mappings.
 					-- See `:help vim.lsp.*` for documentation on any of the below functions
 
-					wk.add({
-						{ "gd", vim.lsp.buf.definition, desc = "LSP: go to definition" },
+		  wk.add({
+		  			{ "gd", vim.lsp.buf.definition, desc = "LSP: go to definition" },
 						{ "gD", vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
 						{ "gr", vim.lsp.buf.references, desc = "LSP: go to references" },
 						{ "K", vim.lsp.buf.hover, desc = "LSP: hover info under cursor" },
