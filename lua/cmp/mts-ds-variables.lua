@@ -131,7 +131,6 @@ ds_vars.setup = function()
     callback(completion_item)
   end
 
-  require('cmp').register_source(source.new())
   cmp.register_source("mts-ds-variables", source.new())
 end
 

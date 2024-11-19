@@ -3,7 +3,7 @@ local predefined_lsp = {
 	"html",
 	"cssls",
 	"lua_ls",
-	"tsserver",
+	"ts_ls",
 	"jsonls",
 	"emmet_language_server",
 	"volar",
