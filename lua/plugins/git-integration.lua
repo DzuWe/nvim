@@ -3,10 +3,9 @@ return {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("gitsigns").setup({
-        on_attach = function()
+        on_attach = function(bufnr)
           local gitsigns = require("gitsigns")
           local wk = require("which-key")
-          local wkb = require("which-key.extras").expand.buf
 
           wk.add({
             { "<leader>h", group = "git signs" },
@@ -14,49 +13,37 @@ return {
               "<leader>hs",
               gitsigns.stage_hunk,
               desc = "Stage hunk",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hr",
               gitsigns.reset_hunk,
               desc = "Reset hunk",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hS",
               gitsigns.stage_buffer,
               desc = "Stage buffer",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hu",
               gitsigns.undo_stage_hunk,
               desc = "Undo stage hunk",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hR",
               gitsigns.reset_buffer,
               desc = "Reset buffer",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hp",
               gitsigns.preview_hunk,
               desc = "Preview hunk",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hb",
@@ -64,17 +51,13 @@ return {
                 gitsigns.blame_line({ full = true })
               end,
               desc = "Blame line",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
             {
               "<leader>hd",
               gitsigns.diffthis,
               desc = "Preview diff this",
-              expand = function()
-                return wkb()
-              end,
+              buffer = bufnr,
             },
           })
         end,

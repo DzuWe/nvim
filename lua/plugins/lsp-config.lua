@@ -29,7 +29,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		config = function()
+		config = function(bufnr)
 			local lspconfig = require("lspconfig")
 			local wk = require("which-key")
 			local wkb = require("which-key.extras").expand.buf
@@ -40,7 +40,7 @@ return {
 				if not status then
 					cfg = {}
 				end
-        cfg.capabilities = capabilities
+				cfg.capabilities = capabilities
 
 				lspconfig[lsp].setup(cfg)
 			end
@@ -64,8 +64,8 @@ return {
 					-- Buffer local mappings.
 					-- See `:help vim.lsp.*` for documentation on any of the below functions
 
-		  wk.add({
-		  			{ "gd", vim.lsp.buf.definition, desc = "LSP: go to definition" },
+					wk.add({
+						{ "gd", vim.lsp.buf.definition, desc = "LSP: go to definition" },
 						{ "gD", vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
 						{ "gr", vim.lsp.buf.references, desc = "LSP: go to references" },
 						{ "K", vim.lsp.buf.hover, desc = "LSP: hover info under cursor" },
@@ -79,50 +79,38 @@ return {
 							vim.lsp.buf.code_action,
 							desc = "LSP: Code action",
 							mode = { "n", "v" },
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 						{
 							"<leader>ld",
 							"<CMD>vertical split | lua vim.lsp.buf.definition()<CR>",
 							desc = "Open definition in side pane",
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 						{
 							"<leader>ls",
 							vim.lsp.buf.signature_help,
 							desc = "Signature help",
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 						{
 							"<leader>lr",
 							vim.lsp.buf.rename,
 							desc = "LSP: rename symbol",
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 						{ "<leader>lw", group = "workspace" },
 						{
 							"<leader>lwa",
 							vim.lsp.buf.add_workspace_folder,
 							desc = "Add workspace folder",
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 						{
 							"<leader>lwr",
 							vim.lsp.buf.remove_workspace_folder,
 							desc = "Remove workspace folder",
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 						{
 							"<leader>lwl",
@@ -130,12 +118,9 @@ return {
 								print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 							end,
 							desc = "List workspace folders",
-							expand = function()
-								return wkb()
-							end,
+							buffer = bufnr,
 						},
 					})
-
 				end,
 			})
 		end,

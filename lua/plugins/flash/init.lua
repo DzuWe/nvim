@@ -23,7 +23,7 @@ return {
   },
 	keys = {
 		{
-			"<CR>",
+			"s",
 			mode = { "n", "x", "o" },
 			function()
 				require("flash").jump()
@@ -45,5 +45,12 @@ return {
     for k, v in pairs(theme) do
       vim.api.nvim_set_hl(0, k, v)
     end
+
+		local has_wk, wk = require("which-key")
+
+    if not has_wk then
+      return
+    end
+    
 	end,
 }
