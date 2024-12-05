@@ -79,38 +79,38 @@ return {
 							vim.lsp.buf.code_action,
 							desc = "LSP: Code action",
 							mode = { "n", "v" },
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 						{
 							"<leader>ld",
 							"<CMD>vertical split | lua vim.lsp.buf.definition()<CR>",
 							desc = "Open definition in side pane",
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 						{
 							"<leader>ls",
 							vim.lsp.buf.signature_help,
 							desc = "Signature help",
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 						{
 							"<leader>lr",
 							vim.lsp.buf.rename,
 							desc = "LSP: rename symbol",
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 						{ "<leader>lw", group = "workspace" },
 						{
 							"<leader>lwa",
 							vim.lsp.buf.add_workspace_folder,
 							desc = "Add workspace folder",
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 						{
 							"<leader>lwr",
 							vim.lsp.buf.remove_workspace_folder,
 							desc = "Remove workspace folder",
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 						{
 							"<leader>lwl",
@@ -118,7 +118,7 @@ return {
 								print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 							end,
 							desc = "List workspace folders",
-							buffer = bufnr,
+							buffer = ev.buf,
 						},
 					})
 				end,
