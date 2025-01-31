@@ -8,10 +8,22 @@ local theme = {
 return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
-	opts = {},
+	opts = {
+    exclude = {
+      "notify",
+      "cmp_menu",
+      "noice",
+      "flash_prompt",
+      "quick_fix",
+      function(win)
+        -- exclude non-focusable windows
+        return not vim.api.nvim_win_get_config(win).focusable
+      end,
+    },
+  },
 	keys = {
 		{
-			"<CR>",
+			"s",
 			mode = { "n", "x", "o" },
 			function()
 				require("flash").jump()
@@ -33,5 +45,12 @@ return {
     for k, v in pairs(theme) do
       vim.api.nvim_set_hl(0, k, v)
     end
+
+		local has_wk, wk = require("which-key")
+
+    if not has_wk then
+      return
+    end
+    
 	end,
 }

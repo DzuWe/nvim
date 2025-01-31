@@ -1,11 +1,9 @@
 local wk = require("which-key")
 
-wk.register({
-  c = {
-    name = "+code actions",
-    f = { vim.lsp.buf.format, "Format buffer" },
-    c = {':%!npx prettier --stdin-filepath %<CR>', 'Try to format buffer with prettier'},
-    y = { '"*y', "yank to clipboard"},
-    p = { '"*p', "past from clipboard"}
-  },
-}, { prefix = "<leader>" })
+wk.add({
+  { "<leader>c",  group = "+code actions" },
+  { "<leader>cf", vim.lsp.buf.format,                       desc = "Format buffer" },
+  { "<leader>cc", ":%!npx prettier --stdin-filepath %<CR>", desc = "Try to format buffer with prettier" },
+  { "<leader>cy", '"*y',                                    desc = "yank to clipboard" },
+  { "<leader>cp", '"*p',                                    desc = "past from clipboard" },
+})

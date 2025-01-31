@@ -41,12 +41,12 @@ ds_vars.setup = function()
 
   local workspace_root = vim.fn.getcwd()
   local node_modules_path = "/node_modules/offering-ui"
-  local dswrapper = "/dist/granat-ds-wrapper.js"
+  local config_wrapper = "/dist/granat-config-wrapper.js"
   local data = nil
 
   local possible_paths = {
-    workspace_root .. dswrapper,
-    workspace_root .. node_modules_path .. dswrapper,
+    workspace_root .. config_wrapper,
+    workspace_root .. node_modules_path .. config_wrapper,
   }
 
   for _, path in ipairs(possible_paths) do
@@ -64,7 +64,6 @@ ds_vars.setup = function()
   end
 
   local parsed_table = parseSingleLineCSSProperties(data)
-
   local source = {}
 
   ---Source constructor.
@@ -132,7 +131,6 @@ ds_vars.setup = function()
     callback(completion_item)
   end
 
-  require('cmp').register_source(source.new())
   cmp.register_source("mts-ds-variables", source.new())
 end
 

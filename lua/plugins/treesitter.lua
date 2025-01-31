@@ -4,8 +4,8 @@ return {
   config = function()
     local config = require("nvim-treesitter.configs")
 
-    vim.filetype.add({ extension = { mdx = "mdx" } })
-    vim.treesitter.language.register("mdx", "markdown")
+ --   vim.filetype.add({ extension = { mdx = "mdx" } })
+ --   vim.treesitter.language.register("mdx", "markdown")
 
     vim.filetype.add({
       pattern = {
