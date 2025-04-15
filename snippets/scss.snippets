@@ -1,0 +1,10 @@
+extends css
+
+snippet use-component "define component variables"
+ @use '@/styles/mixins/variables' as * with (\$component: '$0');
+
+snippet def-var "define private variable"
+ @include define-private-variable('$name',  $value);
+
+snippet use-var "use private variable"
+ use-private-variable('$name');

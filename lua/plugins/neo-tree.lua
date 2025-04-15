@@ -15,9 +15,17 @@ return {
 				"git_status",
 				"document_symbols",
 			},
+      filesystem = {
+				follow_current_file = {
+          leave_dirs_open = false,
+          enabled = true,
+        },
+
+      },
 			buffers = {
 				follow_current_file = {
-					enabled = true,
+			 		enabled = true,
+          leave_dirs_open = false
 				},
 			},
 		})

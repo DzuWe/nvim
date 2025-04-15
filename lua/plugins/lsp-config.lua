@@ -6,7 +6,8 @@ local predefined_lsp = {
 	"ts_ls",
 	"jsonls",
 	"emmet_language_server",
-	"volar",
+  "eslint",
+  "volar",
 	"marksman",
 	"graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
@@ -29,10 +30,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		config = function(bufnr)
+		config = function()
 			local lspconfig = require("lspconfig")
 			local wk = require("which-key")
-			local wkb = require("which-key.extras").expand.buf
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			for _, lsp in ipairs(predefined_lsp) do

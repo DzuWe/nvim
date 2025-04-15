@@ -1,5 +1,18 @@
 extends html, javascript, css
 
-snippet dPropsTs "define props"
+snippet dzPropsTs "define props"
  interface Props {$0}
  const props = defineProps<Props>()
+
+snippet dzComp "define component"
+ <script lang="ts" setup>
+ </script>
+
+ <template>
+ <div>
+  Component markup
+ </div>
+ </template>
+
+ <style lang="scss" scoped>
+ </style>

@@ -1,0 +1,11 @@
+snippet define-story "Story mdx boilerplate"
+  import { Canvas, Meta, Controls } from '@storybook/blocks'
+  import * as ${0}Story from './${0}.story.ts'
+
+  <Meta of={${0}Story} />
+
+  # Granat ${0}
+
+  <Canvas of={${0}Story.Main} />
+  <Controls of={${0}Story.Main} />
+

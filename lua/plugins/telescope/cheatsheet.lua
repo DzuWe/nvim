@@ -24,7 +24,7 @@ return {
       telescope_mappings = {
         ["<CR>"] = ctactions.select_or_fill_commandline,
         ["<A-CR>"] = ctactions.select_or_execute,
-        ["<C-Y>"] = ctactions.copy_cheat_value,
+        ["<C-S>"] = ctactions.copy_cheat_value,
         ["<C-E>"] = ctactions.edit_user_cheatsheet,
       },
     })
