@@ -38,7 +38,6 @@ ds_vars.setup = function()
   if not has_cmp then
     return
   end
-
   local workspace_root = vim.fn.getcwd()
   local node_modules_path = "/node_modules/offering-ui"
   local config_wrapper = "/dist/granat-config-wrapper.js"
