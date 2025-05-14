@@ -2,13 +2,16 @@ return {
 	"stevearc/oil.nvim",
 	config = function()
 		local wk = require("which-key")
+    local oil = require "oil"
 
-		require("oil").setup({
-			default_file_explorer = false,
+		oil.setup({
+			default_file_explorer = true,
+      watch_for_changes = true,
 		})
 
 		wk.add({
-      {"<leader>no",  "<CMD>Oil<CR>", desc = "Toggle Oil" },
+      {"-", "<CMD>Oil<CR>", desc = "Open parrent directory"},
+      {"<leader>ne", oil.toggle_float, desc = "Open float oil"}
 		})
 	end,
 }

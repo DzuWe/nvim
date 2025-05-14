@@ -32,7 +32,7 @@ return {
 
 		wk.add({
 			{ "<leader>n", group = "FileTree Navigation" },
-			{ "<leader>ne", "<CMD>Neotree toggle<CR>", desc = "Toggle neo-tree" },
+			-- { "<leader>ne", "<CMD>Neotree toggle<CR>", desc = "Toggle neo-tree" },
 			{ "<leader>ng", "<CMD>Neotree git_status right toggle<CR>", desc = "Toggle git status" },
 			{ "<leader>nb", "<CMD>Neotree buffers right toggle<CR>", desc = "Toggle buffers" },
 			{ "<leader>ns", "<CMD>Neotree document_symbols right toggle<CR>", desc = "Toggle symbols" },
