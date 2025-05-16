@@ -1,3 +1,22 @@
+local source = {}
+
+local function is_include_in_table(tbl, val)
+    for key, value in pairs(tbl) do
+        if value == val then
+            return true
+        end
+    end
+    return false
+end
+
+function source.new(opts)
+  local self = setmetatable({}, {__index = source})
+  self.opts = opts
+  return self
+end
+
+function source:enabled() return is_include_in_table({'css', 'vue'}, vim.bo.filetype)
+
 local function parseSingleLineCSSProperties(file)
   local parsedTable = {}
   local cr = '\n'

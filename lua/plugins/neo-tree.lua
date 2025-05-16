@@ -1,3 +1,5 @@
+return {}
+--[[
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	dependencies = {
@@ -59,4 +61,4 @@ return {
 			})
 		end, { desc = "Open neo-tree at current file or working directory" })
 	end,
-}
+}]]

@@ -1,39 +1,43 @@
-return {
-}
-
---[[
 local predefined_lsp = {
-	"angularls",
-	"html",
-	"cssls",
-	"lua_ls",
-	"ts_ls",
-	"jsonls",
-	"emmet_language_server",
+  "angularls",
+  "html",
+  "cssls",
+  "lua_ls",
+  "ts_ls",
+  "jsonls",
+  "emmet_language_server",
   "eslint",
   "volar",
-	"marksman",
-	"graphql",
+  "marksman",
+  "graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
 
 return {
-	{
-		"neovim/nvim-lspconfig",
-		lazy = false,
-		config = function()
-			local lspconfig = require("lspconfig")
-			local wk = require("which-key")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-			for _, lsp in ipairs(predefined_lsp) do
-				local status, cfg = pcall(require, "lsp." .. lsp)
-				if not status then
-					cfg = {}
-				end
-				cfg.capabilities = capabilities
-
-				lspconfig[lsp].setup(cfg)
-			end
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+          library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
+    },
+    config = function()
+      local wk = require("which-key")
+      for _, lsp in ipairs(predefined_lsp) do
+        local status, cfg = pcall(require, "lsp." .. lsp)
+        if not status then
+          cfg = {}
+        end
+        vim.lsp.enable(lsp)
+        vim.lsp.config(lsp, cfg)
+      end
 
 			wk.add({
 				{ "[d", vim.diagnostic.goto_prev, desc = "LSP: diagnostic PREV" },
@@ -113,6 +117,21 @@ return {
 					})
 				end,
 			})
-		end,
-	},
-}]]
+    end,
+  },
+  {
+    "mason-org/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        automatic_installation = true,
+        ensure_installed = predefined_lsp,
+      })
+    end,
+  },
+}
