@@ -1,0 +1,30 @@
+{
+	"dzVueProvider": {
+		"prefix": "dzVueProvider",
+		"body": [
+			"import { _throw } from 'offering-ui/utils'",
+			"import { inject, provide } from 'vue'",
+			"import type { InjectionKey } from 'vue'",
+			"",
+			"const INJECTION_KEY: InjectionKey<ReturnType<typeof provide$1>> = Symbol('${2:$1}')",
+			"",
+			"export function provide${3:$1}() {",
+			"    const composable = {}",
+			"    provide(INJECTION_KEY, composable)",
+			"    return composable",
+			"}",
+			"",
+			"export const inject${4:$1} = () => {",
+			"    return inject(INJECTION_KEY) || _throw('[Error] [${5:$1} provider] ${6:$1} provider is undefined')",
+			"}"
+		],
+		"description": "Define base provider"
+	},
+	"dzrt": {
+		"prefix": "dzrt",
+		"body": [
+			"ReturnType<typeof $0>"
+		],
+		"description": "shortcut to ReturnType"
+	}
+}

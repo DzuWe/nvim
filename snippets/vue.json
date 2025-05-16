@@ -1,0 +1,34 @@
+{
+  "Define Props": {
+    "prefix": "dzPropsTs",
+    "body": [
+      "interface Props {$0}",
+      "const props = defineProps<Props>()"
+    ],
+    "description": "Define props"
+  },
+  "Define Short Props": {
+    "prefix": "dzPropsTsShort",
+    "body": [
+      "defineProps<$0>()"
+    ],
+    "description": "Define props"
+  },
+  "Define Component": {
+    "prefix": "dzComp",
+    "body": [
+      "<script lang=\"ts\" setup>",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    Component $TM_FILENAME",
+      "  </div>",
+      "</template>",
+      "",
+      "<style lang=\"scss\" scoped>",
+      "</style>"
+    ],
+    "description": "Define component"
+  }
+}

@@ -1,23 +1,22 @@
+--- @module 'blink.cmp'
+--- @class blink.cmp.Source
 local source = {}
 
-local function is_include_in_table(tbl, val)
-    for key, value in pairs(tbl) do
-        if value == val then
-            return true
-        end
+local registered = false
+local cmp_data = {}
+
+local function table_include(table, value)
+  for _, element in pairs(table) do
+    if element == value then
+      return true
     end
-    return false
+  end
+  return false
 end
-
-function source.new(opts)
-  local self = setmetatable({}, {__index = source})
-  self.opts = opts
-  return self
-end
-
-function source:enabled() return is_include_in_table({'css', 'vue'}, vim.bo.filetype)
 
 local function parseSingleLineCSSProperties(file)
+  --- @module 'vim'
+  --- @class lsp.CompletionItem[]
   local parsedTable = {}
   local cr = '\n'
 
@@ -28,35 +27,27 @@ local function parseSingleLineCSSProperties(file)
       if outerKey and value then
         local k = outerKey .. ' ' .. innerKey:gsub("-", " ")
 
-        parsedTable[k] = {
+        --- @class lsp.CompletionItem
+        table.insert(parsedTable, {
+          label = k,
           documentation = string.format(
             'Figma Variable: ' .. '%s' .. cr ..
             'CSS Property: ' .. '%s' .. cr ..
             'Value: ' .. '%s'
             , k, property, value),
-          property = property,
-          value = value
-        }
+          insertText = property
+        })
       end
     end
-  end
 
-  return parsedTable
+    return parsedTable
+  end
 end
 
-local ds_vars = {}
-local registered = false
 
-ds_vars.setup = function()
-  if registered then
-    return
-  end
-  registered = true
+local function loadProperties()
+  if registered then return end
 
-  local has_cmp, cmp = pcall(require, "cmp")
-  if not has_cmp then
-    return
-  end
   local workspace_root = vim.fn.getcwd()
   local node_modules_path = "/node_modules/offering-ui"
   local config_wrapper = "/dist/granat-config-wrapper.js"
@@ -76,80 +67,33 @@ ds_vars.setup = function()
     ::continue::
   end
 
-
   if not data then
     return
   end
-
-  local parsed_table = parseSingleLineCSSProperties(data)
-  local source = {}
-
-  ---Source constructor.
-  source.new = function()
-    local self = setmetatable({}, { __index = source })
-    return self
-  end
-
-  ---Return the source is available or not.
-  ---@return boolean
-  function source:is_available()
-    return true
-  end
-
-  ---Return the source name for some information.
-  function source:get_debug_name()
-    return 'mts-ds-variables'
-  end
-
-  ---Return trigger characters.
-  function source:get_trigger_characters()
-    return { '-' }
-  end
-
-  function source:complete(params, callback)
-    local input = string.sub(params.context.cursor_before_line, params.offset - 2)
-    local prefix = string.sub(params.context.cursor_before_line, 1, params.offset - 1)
-
-    if vim.endswith(prefix, "--") then
-      local items = {}
-      for key, value in pairs(parsed_table) do
-        table.insert(items, {
-          label = key,
-          documentation = value.documentation,
-          textEdit = {
-            newText = value.property,
-            range = {
-              start = {
-                line = params.context.cursor.row - 1,
-                character = params.context.cursor.col - 1 - #input,
-              },
-              ["end"] = {
-                line = params.context.cursor.row - 1,
-                character = params.context.cursor.col - 1,
-              }
-            }
-
-          }
-        })
-      end
-      callback({
-        items = items,
-        incomplete = true
-      })
-    else
-      callback({ incomplete = true })
-    end
-  end
-
-  function source:resolve(completion_item, callback)
-    callback(completion_item)
-  end
-
-  function source:execute(completion_item, callback)
-    callback(completion_item)
-  end
-
-  cmp.register_source("mts-ds-variables", source.new())
+  cmp_data = parseSingleLineCSSProperties(data)
 end
 
-return ds_vars
+function source.new()
+  loadProperties()
+  local self = setmetatable({}, { __index = source })
+  return self
+end
+
+function source:enabled()
+  return table_include({ 'ts', 'vue', 'html', 'css', 'scss' }, vim.bo.filetype)
+end
+
+function source:get_trigger_characters()
+  return { "-" }
+end
+
+function source:get_completions(ctx, cb)
+  cb({
+    items = cmp_data,
+    is_incomplete_backward = false,
+    is_incomplete_forward = false
+  })
+  return function() end
+end
+
+return source
