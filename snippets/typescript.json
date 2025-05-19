@@ -1,5 +1,20 @@
 {
-	"dzVueProvider": {
+  "Define Vue Props": {
+    "prefix": "dzPropsTs",
+    "body": [
+      "interface Props {$0}",
+      "const props = defineProps<Props>()"
+    ],
+    "description": "Define props"
+  },
+  "Define Vue Short Props": {
+    "prefix": "dzPropsTsShort",
+    "body": [
+      "defineProps<$0>()"
+    ],
+    "description": "Define props"
+  },
+	"Create Vue Provider": {
 		"prefix": "dzVueProvider",
 		"body": [
 			"import { _throw } from 'offering-ui/utils'",
@@ -20,7 +35,7 @@
 		],
 		"description": "Define base provider"
 	},
-	"dzrt": {
+	"Add return type": {
 		"prefix": "dzrt",
 		"body": [
 			"ReturnType<typeof $0>"
