@@ -16,7 +16,10 @@ return {
 	{
 		"olimorris/codecompanion.nvim",
 		config = function()
-			require("codecompanion").setup({
+      local wk = require('which-key')
+      local cc = require('codecompanion')
+
+			cc.setup({
 				strategies = {
 					chat = {
 						adapter = "devx-"..defaultModelName,
@@ -33,6 +36,7 @@ return {
         },
 				adapters = require('utils.ai-utils').createAdapters(config, defaultUrl),
 			})
+
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",

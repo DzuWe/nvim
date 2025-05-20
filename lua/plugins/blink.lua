@@ -26,21 +26,18 @@ return {
 		--
 		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
-			preset = "enter",
-		},
+			preset = "default",
+      ['<C-d>'] = {'show', 'show_documentation', 'hide_documentation'},
+    },
 
 		appearance = {
 			nerd_font_variant = "mono",
 		},
 
     signature = {
-      enabled = false,
+      enabled = true,
       window = { show_documentation = false }
     },
-		-- (Default) Only show the documentation popup when manually triggered
-		completion = {
-			documentation = { auto_show = false },
-		},
 
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
