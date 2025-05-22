@@ -13,6 +13,7 @@ opts.incsearch = true
 opts.ignorecase = true
 opts.smartcase = true
 opts.hlsearch = true
+opts.conceallevel = 2
 
 -- Appearance
 opts.number = true

@@ -1,5 +1,6 @@
 local mini_modules = {
-  "surround", --"starter",
+  "starter",
+  "surround",
   "comment",
   "snippets",
   "indentscope",

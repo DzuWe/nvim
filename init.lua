@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+require('config.globals')
 require('config.options')
 require('config.autocommands')
 vim.g.mapleader = " "
