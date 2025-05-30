@@ -1,5 +1,6 @@
 local predefined_lsp = {
   "angularls",
+  "dockerls",
   "html",
   "cssls",
   "lua_ls",
@@ -7,7 +8,7 @@ local predefined_lsp = {
   "jsonls",
   "emmet_language_server",
   "eslint",
-  "volar",
+  "vue_ls",
   "marksman",
   "graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp

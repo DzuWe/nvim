@@ -20,6 +20,7 @@ opts.number = true
 opts.termguicolors = true
 opts.signcolumn = "yes"
 opts.colorcolumn = "100"
+opts.clipboard = 'unnamedplus'
 opts.cmdheight = 0
 opts.scrolloff = 10
 opts.completeopt = "menuone,noinsert,noselect"

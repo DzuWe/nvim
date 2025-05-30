@@ -1,5 +1,6 @@
 return {
 	"stevearc/oil.nvim",
+	enabled = true,
 	config = function()
 		local wk = require("which-key")
 		local oil = require("oil")
@@ -28,12 +29,6 @@ return {
 
 		wk.add({
 			{ "-", "<CMD>Oil<CR>", desc = "Open parrent directory" },
-			{ "<leader>ne", oil.toggle_float, desc = "Open float oil" },
-			{ "<leader>o", group = "Obsidian" },
-			{ "<leader>ov", function()
-        vim.cmd("vsplit")
-        oil.open(vim.g.OBSIDIAN_PATH)
-      end, desc = "vault" },
 		})
 	end,
 }

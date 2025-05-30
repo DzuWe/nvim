@@ -34,11 +34,20 @@ return {
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer", "granat-ds" },
+			per_filetype = {
+				org = { "orgmode", "buffer", "snippets" },
+			},
 			providers = {
+				orgmode = {
+					name = "Orgmode",
+          module = "orgmode.org.autocompletion.blink",
+          fallbacks = { "buffer" }
+				},
 				["granat-ds"] = {
 					name = "Granat tokens provider",
 					module = "cmp.mts-ds-variables",
 					opts = {},
+          fallbacks = { "buffer" }
 				},
 			},
 		},

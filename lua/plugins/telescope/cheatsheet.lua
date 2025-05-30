@@ -13,7 +13,7 @@ return {
         enabled = {
           "auto-session",
           "goto-preview",
-          "octo.nvim",
+          -- "octo.nvim",
           "telescope.nvim",
           "vim-easy-align",
           "vim-sandwich",

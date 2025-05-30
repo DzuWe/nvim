@@ -13,7 +13,8 @@ local footer = [[
 ]]
 
 local oil = require("oil")
-local VAULTS_DIR = "~/Obsidian/"
+ local org_roam =        require('org-roam')
+local ORG_DIR = "~/orgfiles/"
 local NVIM_DIR = "~/.config/nvim"
 return {
   header = header,
@@ -21,9 +22,9 @@ return {
   query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_.',
   items = {
     {
-      name = "Quick note",
+      name = "Daily note",
       action = function()
-        vim.cmd("")
+        org_roam.ext.dailies.goto_today()
       end,
       section = "Quick"
     },
@@ -37,10 +38,9 @@ return {
     },
     {
       action = function()
-        vim.cmd("cd " .. VAULTS_DIR)
-        oil.open(VAULTS_DIR)
+        oil.open(ORG_DIR)
       end,
-      name = "Obsidian Vaults []",
+      name = "Orgfiles []",
       section = "Destinations",
     },
   },
