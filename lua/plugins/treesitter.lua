@@ -3,6 +3,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
+      require("nvim-treesitter.install").compilers = { "gcc-12" }
 			local config = require("nvim-treesitter.configs")
 
 			--   vim.filetype.add({ extension = { mdx = "mdx" } })

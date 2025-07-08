@@ -13,7 +13,7 @@ local footer = [[
 ]]
 
 local oil = require("oil")
- local org_roam =        require('org-roam')
+
 local ORG_DIR = "~/orgfiles/"
 local NVIM_DIR = "~/.config/nvim"
 return {
@@ -24,7 +24,6 @@ return {
     {
       name = "Daily note",
       action = function()
-        org_roam.ext.dailies.goto_today()
       end,
       section = "Quick"
     },
