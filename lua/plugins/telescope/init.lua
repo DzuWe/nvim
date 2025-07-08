@@ -3,12 +3,10 @@ local file_ignore_patterns = {
 }
 
 local function get_obsidian_root()
-
-  local function get_git_root()
-    local dot_git_path = vim.fn.finddir(".git", ".;")
-    return vim.fn.fnamemodify(dot_git_path, ":h")
-  end
-
+	local function get_git_root()
+		local dot_git_path = vim.fn.finddir(".git", ".;")
+		return vim.fn.fnamemodify(dot_git_path, ":h")
+	end
 end
 
 local function get_module(name)
@@ -58,8 +56,18 @@ return {
 			})
 
 			ts.setup({
+				defaults = {
+					mappings = {
+						n = {
+							["<C-q>"] = require("telescope.actions").delete_buffer,
+						},
+						i = {
+							["<C-q>"] = require("telescope.actions").delete_buffer,
+						},
+					},
+				},
 				extentions = {
-          "orgmode",
+					"orgmode",
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
