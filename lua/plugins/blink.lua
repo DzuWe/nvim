@@ -37,22 +37,7 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "granat-ds" },
-      per_filetype = {
-        norg = {"neorg", "snippets", "path"}
-      },
-			providers = {
-        neorg = {
-          name = "neorg",
-          module = "blink.compat.source"
-        },
-				["granat-ds"] = {
-					name = "Granat tokens provider",
-					module = "cmp.mts-ds-variables",
-					opts = {},
-          fallbacks = { "buffer" }
-				},
-			},
+			default = { "lsp", "path", "snippets", "buffer" },
 		},
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
