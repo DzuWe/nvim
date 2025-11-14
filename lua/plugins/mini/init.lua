@@ -1,5 +1,4 @@
 local mini_modules = {
-  "starter",
   "surround",
   "comment",
   "snippets",

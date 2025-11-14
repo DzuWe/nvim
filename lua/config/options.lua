@@ -6,6 +6,7 @@ opts.softtabstop = 2
 opts.shiftwidth = 2
 opts.expandtab = true
 opts.smartindent = true
+opts.relativenumber = true
 opts.wrap = false
 
 -- Search
@@ -13,7 +14,7 @@ opts.incsearch = true
 opts.ignorecase = true
 opts.smartcase = true
 opts.hlsearch = true
-opts.conceallevel = 2
+-- opts.conceallevel = 2
 
 -- Appearance
 opts.number = true

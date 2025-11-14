@@ -4,14 +4,18 @@ local predefined_lsp = {
   "html",
   "cssls",
   "lua_ls",
-  "ts_ls",
   "jsonls",
   "emmet_language_server",
   "eslint",
-  "vue_ls",
+-- "ts_ls",
+ "vue_ls",
+ "vtsls",
   "marksman",
   "graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
+
+
+
 
 return {
   {
@@ -130,7 +134,10 @@ return {
     "mason-org/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        automatic_installation = true,
+        automatic_installation = false,
+        automatic_enable = {
+          exclude = { "ts_ls" }
+        },
         ensure_installed = predefined_lsp,
       })
     end,

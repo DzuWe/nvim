@@ -56,18 +56,7 @@ return {
 			})
 
 			ts.setup({
-				defaults = {
-					mappings = {
-						n = {
-							["<C-q>"] = require("telescope.actions").delete_buffer,
-						},
-						i = {
-							["<C-q>"] = require("telescope.actions").delete_buffer,
-						},
-					},
-				},
 				extentions = {
-					"orgmode",
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
