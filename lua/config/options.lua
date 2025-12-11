@@ -6,7 +6,7 @@ opts.softtabstop = 2
 opts.shiftwidth = 2
 opts.expandtab = true
 opts.smartindent = true
-opts.relativenumber = true
+opts.relativenumber = false
 opts.wrap = false
 
 -- Search

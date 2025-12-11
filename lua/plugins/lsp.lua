@@ -7,14 +7,12 @@ local predefined_lsp = {
   "jsonls",
   "emmet_language_server",
   "eslint",
--- "ts_ls",
+ -- "ts_ls",
  "vue_ls",
  "vtsls",
   "marksman",
   "graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
-
-
 
 
 return {

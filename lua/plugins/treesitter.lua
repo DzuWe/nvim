@@ -24,7 +24,7 @@ return {
 
 			config.setup({
 				auto_install = true,
-				ensure_installed = { "lua", "javascript", "typescript", "vue" },
+				ensure_installed = { "html", "lua", "javascript", "typescript", "vue" },
 				highlight = { enable = true },
 				indent = { enable = true },
 			})

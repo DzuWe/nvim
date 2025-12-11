@@ -7,11 +7,7 @@ return {
     null_ls.setup({
       sources = {
         b.formatting.stylua,
-        b.formatting.prettier.with({
-          env = {
-            PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("$HOME/.config/nvim/utils/prettier/.prettierrc.json"),
-          },
-        }),
+        b.formatting.prettier,
       },
     })
   end,
