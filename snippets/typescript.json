@@ -30,12 +30,40 @@
 			"    return composable",
 			"}",
 			"",
-			"export const inject${5:$1} = () => {",
+			"export const use${5:$1} = () => {",
 			"    return inject(INJECTION_KEY) || _throw('[Error] [${6:$1} provider] ${7:$1} provider is undefined')",
 			"}"
 		],
 		"description": "Define base provider"
 	},
+  "DefaultStory": {
+    "prefix": "dzStoryV3",
+    "body": [
+"import type { Meta, StoryObj } from '@storybook/vue3-vite'",
+"import { Cui$1 } from '@console-ui/ui'",
+"",
+"const descriptionMdString = `Компонент ${2:$1}`",
+"",
+"const meta = {",
+"  title: '@console-ui/${3:$1}',",
+"  component: Cui${4:$1} as unknown as Record<string, unknown>,",
+"  tags: ['autodocs'],",
+"  parameters: {",
+"    docs: {",
+"      description: {",
+"        component: descriptionMdString,",
+"      },",
+"    },",
+"  },",
+"} satisfies Meta<typeof Cui${5:$1}>",
+"export default meta",
+"type Story = StoryObj<typeof meta>",
+"",
+"export const Primary: Story = { $0 }"
+    ],
+		"description": "Story template"
+
+  },
 	"Add return type": {
 		"prefix": "dzrt",
 		"body": [

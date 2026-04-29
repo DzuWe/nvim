@@ -15,6 +15,7 @@ end
 return {
 	{
 		"olimorris/codecompanion.nvim",
+    enabled = false,
 		config = function()
       local wk = require('which-key')
       local cc = require('codecompanion')
@@ -38,6 +39,7 @@ return {
 			})
 
 		end,
+    version = '17.33.0',
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",

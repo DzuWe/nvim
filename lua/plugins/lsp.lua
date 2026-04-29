@@ -1,4 +1,5 @@
 local predefined_lsp = {
+  "null-ls",
   "angularls",
   "dockerls",
   "html",
@@ -43,8 +44,8 @@ return {
       end
 
 			wk.add({
-				{ "[d", vim.diagnostic.goto_prev, desc = "LSP: diagnostic PREV" },
-				{ "]d", vim.diagnostic.goto_next, desc = "LSP: diagnostic NEXT" },
+				{ "[d", vim.diagnostic.get_prev, desc = "LSP: diagnostic PREV" },
+				{ "]d", vim.diagnostic.get_next, desc = "LSP: diagnostic NEXT" },
 				{ "<leader>e", vim.diagnostic.open_float, desc = "LSP: hover diagnostic" },
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>lR", "<CMD>LspRestart<CR>", desc = "Restart server" },

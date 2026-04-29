@@ -1,13 +1,15 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+    branch = "main",
 		build = ":TSUpdate",
+    lazy = false,
 		config = function()
-      require("nvim-treesitter.install").compilers = { "gcc-12" }
-			local config = require("nvim-treesitter.configs")
+			  require("nvim-treesitter.install").compilers = { "gcc-12" }
+			 local config = require("nvim-treesitter")
 
-			--   vim.filetype.add({ extension = { mdx = "mdx" } })
-			--   vim.treesitter.language.register("mdx", "markdown")
+			  vim.filetype.add({ extension = { mdx = "mdx" } })
+			  vim.treesitter.language.register("mdx", "markdown")
 
 			vim.filetype.add({
 				pattern = {

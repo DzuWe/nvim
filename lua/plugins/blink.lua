@@ -1,3 +1,4 @@
+local granat_variables = require('utils.granat_source');
 return {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
@@ -21,10 +22,10 @@ return {
   opts = {
     snippets = { preset = "mini_snippets" },
     keymap = {
-      preset = "default",
-      ["<C-d>"] = { "show", "show_documentation", "hide_documentation" },
+      preset = "default", -- Стандартная раскладка клавиш для автодополнения
+      ["<C-d>"] = { "show", "show_documentation", "hide_documentation" }, -- Показать/скрыть документацию: Ctrl+D
+      ["<C-h>"] = { "hide" }, -- Скрыть меню автодополнения: Ctrl+H
     },
-
     appearance = {
       nerd_font_variant = "mono",
     },
@@ -33,11 +34,26 @@ return {
       enabled = true,
       window = { show_documentation = false },
     },
+    completion = {
+      menu = {
+        auto_show = true
+      },
+    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      per_filetype = {
+        scss = {},
+      }
+    },
+    providers = {
+      granat_colors = {
+        name = "granat_colors",
+        module = "utils.granat_source",
+        opts = {}
+      }
     },
 
     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
