@@ -1,17 +1,18 @@
 local mini_modules = {
+  "indentscope",
+  "ai",
   "surround",
   "icons",
   "comment",
   "completion",
   "snippets",
-  "indentscope",
-  "ai",
 }
 
 local modules_path = "plugins.mini."
 return {
   {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
+  version = "*",
   dependencies = {
     { "rafamadriz/friendly-snippets" }
   },

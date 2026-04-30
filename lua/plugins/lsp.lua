@@ -8,8 +8,8 @@ local predefined_lsp = {
   "jsonls",
   "emmet_language_server",
   "eslint",
- "vue_ls",
- "vtsls",
+  "vue_ls",
+  "vtsls",
   "marksman",
   "graphql",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
@@ -42,84 +42,62 @@ return {
         vim.lsp.config(lsp, cfg)
       end
 
-			wk.add({
-				{ "[d", vim.diagnostic.get_prev, desc = "LSP: diagnostic PREV" },
-				{ "]d", vim.diagnostic.get_next, desc = "LSP: diagnostic NEXT" },
-				{ "<leader>e", vim.diagnostic.open_float, desc = "LSP: hover diagnostic" },
-				{ "<leader>l", group = "LSP" },
-				{ "<leader>lR", "<CMD>LspRestart<CR>", desc = "Restart server" },
-			})
+      wk.add({
+        { "<leader>e",  vim.diagnostic.open_float, desc = "LSP: hover diagnostic" },
+        { "<leader>lR", "<CMD>lsp restart<CR>",    desc = "Restart server" },
+      })
 
-			-- Use LspAttach autocommand to only map the following keys
-			-- after the language server attaches to the current buffer
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-				callback = function(ev)
-					-- Enable completion triggered by <c-x><c-o>
-					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+      -- Use LspAttach autocommand to only map the following keys
+      -- after the language server attaches to the current buffer
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(ev)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          MiniSnippets.start_lsp_server({ buffer = ev.buf })
+          -- Buffer local mappings.
+          -- See `:help vim.lsp.*` for documentation on any of the below functions
+          --
 
-					-- Buffer local mappings.
-					-- See `:help vim.lsp.*` for documentation on any of the below functions
-
-					wk.add({
-						{ "gd", vim.lsp.buf.definition, desc = "LSP: go to definition" },
-						{ "gD", vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
-						{ "gr", vim.lsp.buf.references, desc = "LSP: go to references" },
-						{ "K", vim.lsp.buf.hover, desc = "LSP: hover info under cursor" },
-						{ "gi", vim.lsp.buf.implementation, desc = "LSP: go to implementation" },
-						{ "<leader>D", vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
-						{ "<leader>cF", vim.lsp.buf.format, desc = "LSP: format buffer" },
-					})
-					wk.add({
-						{
-							"<leader><leader>",
-							vim.lsp.buf.code_action,
-							desc = "LSP: Code action",
-							mode = { "n", "v" },
-							buffer = ev.buf,
-						},
-						{
-							"<leader>ld",
-							"<CMD>vertical split | lua vim.lsp.buf.definition()<CR>",
-							desc = "Open definition in side pane",
-							buffer = ev.buf,
-						},
-						{
-							"<leader>ls",
-							vim.lsp.buf.signature_help,
-							desc = "Signature help",
-							buffer = ev.buf,
-						},
-						{
-							"<leader>lr",
-							vim.lsp.buf.rename,
-							desc = "LSP: rename symbol",
-							buffer = ev.buf,
-						},
-						{ "<leader>lw", group = "workspace" },
-						{
-							"<leader>lwa",
-							vim.lsp.buf.add_workspace_folder,
-							desc = "Add workspace folder",
-							buffer = ev.buf,
-						},
-						{
-							"<leader>lwr",
-							vim.lsp.buf.remove_workspace_folder,
-							desc = "Remove workspace folder",
-							buffer = ev.buf,
-						},
-						{
-							"<leader>lwl",
-							function()
-								print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-							end,
-							desc = "List workspace folders",
-							buffer = ev.buf,
-						},
-					})
-				end,
-			})
+          wk.add({
+            { "gd",         vim.lsp.buf.definition,      desc = "LSP: go to definition" },
+            { "gD",         vim.lsp.buf.type_definition, desc = "LSP: go to type definition" },
+            { "gr",         vim.lsp.buf.references,      desc = "LSP: go to references" },
+            { "K",          vim.lsp.buf.hover,           desc = "LSP: hover info under cursor" },
+            { "gi",         vim.lsp.buf.implementation,  desc = "LSP: go to implementation" },
+          })
+          wk.add({
+            { "<leader>lh", vim.diagnostic.get_prev, desc = "LSP: diagnostic PREV", buffer = ev.buf },
+            { "<leader>ll", vim.diagnostic.get_next, desc = "LSP: diagnostic NEXT", buffer = ev.buf },
+            {
+              "<leader><leader>",
+              vim.lsp.buf.code_action,
+              desc = "LSP: Code action",
+              mode = { "n", "v" },
+              buffer = ev.buf,
+            },
+            {
+              "<leader>ld",
+              "<CMD>vertical split | lua vim.lsp.buf.definition()<CR>",
+              desc = "Open definition in side pane",
+              buffer = ev.buf,
+            },
+            {
+              "<leader>ls",
+              vim.lsp.buf.signature_help,
+              desc = "Signature help",
+              buffer = ev.buf,
+            },
+            {
+              "<leader>lr",
+              vim.lsp.buf.rename,
+              desc = "LSP: rename symbol",
+              buffer = ev.buf,
+            },
+            { "<leader>lw", group = "workspace" },
+          })
+        end,
+      })
     end,
   },
 }

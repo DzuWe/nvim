@@ -33,7 +33,7 @@ return {
             file_ignore_patterns = file_ignore_patterns,
           })
         end,
-        desc = "Find file",
+        desc = "Find file (with hidden)",
       },
       { "<leader>fg", builtin.live_grep, desc = "Find in files" },
       { "<leader>fb", builtin.buffers,   desc = "Find in buffers" },
