@@ -1,0 +1,74 @@
+{
+  "Define Vue Props": {
+    "prefix": "dzPropsTs",
+    "body": [
+      "interface Props {$0}",
+      "const props = defineProps<Props>()"
+    ],
+    "description": "Define props"
+  },
+  "Define Vue Short Props": {
+    "prefix": "dzPropsTsShort",
+    "body": [
+      "defineProps<$0>()"
+    ],
+    "description": "Define props"
+  },
+	"Create Vue Provider": {
+		"prefix": "dzVueProvider",
+		"body": [
+			"import { _throw } from 'offering-ui/utils'",
+			"import { inject, provide } from 'vue'",
+			"import type { InjectionKey } from 'vue'",
+			"",
+			"export type $1Provider = ReturnType<typeof provide${2:$1}>",
+			"const INJECTION_KEY: InjectionKey<${2:$1}Provider> = Symbol('${3:$1}')",
+			"",
+			"export function provide${4:$1}() {",
+			"    const composable = {}",
+			"    provide(INJECTION_KEY, composable)",
+			"    return composable",
+			"}",
+			"",
+			"export const use${5:$1} = () => {",
+			"    return inject(INJECTION_KEY) || _throw('[Error] [${6:$1} provider] ${7:$1} provider is undefined')",
+			"}"
+		],
+		"description": "Define base provider"
+	},
+  "DefaultStory": {
+    "prefix": "dzStoryV3",
+    "body": [
+"import type { Meta, StoryObj } from '@storybook/vue3-vite'",
+"import { Cui$1 } from '@console-ui/ui'",
+"",
+"const descriptionMdString = `Компонент ${2:$1}`",
+"",
+"const meta = {",
+"  title: '@console-ui/${3:$1}',",
+"  component: Cui${4:$1} as unknown as Record<string, unknown>,",
+"  tags: ['autodocs'],",
+"  parameters: {",
+"    docs: {",
+"      description: {",
+"        component: descriptionMdString,",
+"      },",
+"    },",
+"  },",
+"} satisfies Meta<typeof Cui${5:$1}>",
+"export default meta",
+"type Story = StoryObj<typeof meta>",
+"",
+"export const Primary: Story = { $0 }"
+    ],
+		"description": "Story template"
+
+  },
+	"Add return type": {
+		"prefix": "dzrt",
+		"body": [
+			"ReturnType<typeof $0>"
+		],
+		"description": "shortcut to ReturnType"
+	}
+}

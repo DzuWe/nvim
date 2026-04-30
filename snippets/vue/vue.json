@@ -1,0 +1,19 @@
+{
+  "Define Component": {
+    "prefix": "dzComp",
+    "body": [
+      "<script lang=\"ts\" setup>",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    Component $TM_FILENAME",
+      "  </div>",
+      "</template>",
+      "",
+      "<style lang=\"scss\" scoped>",
+      "</style>"
+    ],
+    "description": "Define component"
+  }
+}
