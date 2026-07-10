@@ -1,6 +1,5 @@
 local predefined_lsp = {
-  "null-ls",
-  "angularls",
+ -- "angularls",
   "dockerls",
   "html",
   "cssls",
@@ -9,9 +8,11 @@ local predefined_lsp = {
   "emmet_language_server",
   "eslint",
   "vue_ls",
+--  "ts_ls",
   "vtsls",
   "marksman",
   "graphql",
+  "stylelint_lsp",
 } -- Преднастроенные языки. Обязательно надо создать файл в папке lsp
 
 
@@ -38,8 +39,8 @@ return {
         if not status then
           cfg = {}
         end
-        vim.lsp.enable(lsp)
         vim.lsp.config(lsp, cfg)
+        vim.lsp.enable(lsp)
       end
 
       wk.add({

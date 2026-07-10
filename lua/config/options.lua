@@ -8,6 +8,8 @@ opts.expandtab = true
 opts.smartindent = true
 opts.relativenumber = false
 opts.wrap = false
+opts.textwidth = 0
+vim.opt.formatoptions:remove({ 't', 'c' })
 
 -- Search
 opts.incsearch = true
